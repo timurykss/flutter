@@ -186,18 +186,24 @@ class _LogFormWidgetState extends ConsumerState<LogFormWidget> {
                         duration: DEFAULT_ANIMATION_DURATION,
                         curve: DEFAULT_ANIMATION_CURVE,
                       );
-                      setState(() {
-                        _isSaving = false;
-                      });
+                      if (mounted) {
+                        setState(() {
+                          _isSaving = false;
+                        });
+                      }
                     } on WgerHttpException {
-                      setState(() {
-                        _isSaving = false;
-                      });
+                      if (mounted) {
+                        setState(() {
+                          _isSaving = false;
+                        });
+                      }
                       rethrow;
                     } finally {
-                      setState(() {
-                        _isSaving = false;
-                      });
+                      if (mounted) {
+                        setState(() {
+                          _isSaving = false;
+                        });
+                      }
                     }
                   },
             child: _isSaving ? const FormProgressIndicator() : Text(i18n.save),
